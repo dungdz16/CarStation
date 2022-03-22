@@ -1,0 +1,529 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD21\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">3/22/2022</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">2:55:06 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///D:\CarStation\DK TT\DK TT.PcbDoc" class="file"><acronym title="D:\CarStation\DK TT\DK TT.PcbDoc">D:\CarStation\DK TT\DK TT.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">2</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">57</td></tr>
+</table>
+</td>
+</table><a name="ID3KXLOLBHHVEHOISTVXF0BJLN2JQXRYOP2ZIRT5CNUCPJD3SCMPUP"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDKT1BBF21PRMIJ14OE2TGN2QZHISHPPOCTJJY12NMQ3BWRPUUEANM">Design contains shelved or modified (but not repoured) polygons. The result of DRC is not correct. Recommended to restore/repour all polygons and proceed with DRC again</a></td>
+<td class="column2">2</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">2</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDU3M0LMFHBFSDFPTTFKJHUILAMRUNU2TLEQBOAIK2JBZGJMTSFNI">Clearance Constraint (Gap=7.874mil) (All),(All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQDUSZQLEV4G2HGE1I05EX0ATXBROAYUUUD0AZDGMEMKHD0SMDRZE">Clearance Constraint (Gap=5mil) (All),(HasFootprint('KIONIX_KXTJ3-1057'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOO0ESYUOF1QJJ011WLAONDZUVIXNUVY0ZGKY44MXISV4Y20G333G">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDND0SXNAQFLP4FM0MDHSM5HPRIHDAGSDTYYLRIPKUB3H1YI0LJLGK">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDAKZLF1DI2SSDL4C3ZIA5O5GDZGQGM0ORJ34YH5DKZZPKHZSFGHBO">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDHJYHAAJAL532M5FXUZJ0PJWUSJKGY52DUDR1MBKWCKVZISQ2SCEN">Width Constraint (Min=10mil) (Max=60mil) (Preferred=15mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID1D1QV41LBXC1ISCQXOYZWP4UHJ1ZSE24FKMR3LPIJOZJSI0BHG0P">Power Plane Connect Rule(Relief Connect )(Expansion=20mil) (Conductor Width=20mil) (Air Gap=10mil) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDT2D4BXMGMP5PNTERL0ZZWYGNPTWTGWCEWA5RAO5S2VLOBE3TH2O">Hole Size Constraint (Min=19.685mil) (Max=100mil) (All)</a></td>
+<td class="column2">54</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID4EJCYCDCO2E4BY2CB2RLTIBVQMMINPJQGVA31XIZEPK55FPTYHHJ">Hole To Hole Clearance (Gap=10mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDFSHDLMLNFNBJHVYZVEBJUXYSNPJ50UD2HBUWRAOVDKS4HB5VCVMO">Minimum Solder Mask Sliver (Gap=0mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOIXMG2Q5WPT4K2L5OYS2UQK1AEX0MW0N4DQXTPHM32MQZANSFEI">Silk To Solder Mask (Clearance=0mil) (IsPad),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQ5OIRSIHI1VYFOKDUQCDZOZXVFXYQMLZSWODTFB1ZXQV4C3AHEMP">Silk to Silk (Clearance=0mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDJTKP5KW3OWEWPCDL3MUOACIEIFBGWZEWKJDTKQDVDEPJLEDQFVIB">Net Antennae (Tolerance=0mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDDCD1O53QSYYVKH2Y1GOTB0BKQCOYFBWUSOTRS2CPLBZFPAIGFQRD">Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCUCCN4WIFV02F3EM4ZTUD2WMYDYKSSKAHWLSGLDU1SSIPSHDHKCJ">Silk primitive without silk layer</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">57</td>
+</tr>
+</table><br><a name="IDZRJFNA32MMUZBEGRNB1WCULTWIFPH5B55M1SZFPRVZOT3YYQT4RK"><h2>Warnings</h2></a><a name="IDKT1BBF21PRMIJ14OE2TGN2QZHISHPPOCTJJY12NMQ3BWRPUUEANM"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="warning">Design contains shelved or modified (but not repoured) polygons. The result of DRC is not correct. Recommended to restore/repour all polygons and proceed with DRC again</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">Polygon named: Bottom Layer-No Net In net GND On Top Layer</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">Polygon named: Bottom Layer-No Net In net GND On Bottom Layer</td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDU3M0LMFHBFSDFPTTFKJHUILAMRUNU2TLEQBOAIK2JBZGJMTSFNI"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=7.874mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8913.517mil|Location2.X=8922.641mil|Location1.Y=5925.746mil|Location2.Y=5934.87mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8913.517mil|Location2.X=8922.641mil|Location1.Y=5925.746mil|Location2.Y=5934.87mil|Absolute=True">Clearance Constraint: (2.874mil &lt; 7.874mil) Between Pad JP12-1(1625mil,-2211mil) on Multi-Layer And Track (1570.874mil,-2261.374mil)(2854.374mil,-2261.374mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDAKZLF1DI2SSDL4C3ZIA5O5GDZGQGM0ORJ34YH5DKZZPKHZSFGHBO"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Modified Polygon (Allow modified: No), (Allow shelved: No)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3171.417mil|Location2.X=7395.417mil|Location1.Y=4504.764mil|Location2.Y=8274.764mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3171.417mil|Location2.X=7395.417mil|Location1.Y=4504.764mil|Location2.Y=8274.764mil|Absolute=True">Modified Polygon: Polygon Shelved  (Bottom Layer-No Net) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3464.417mil|Location2.X=7217.417mil|Location1.Y=4582.764mil|Location2.Y=8238.764mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3464.417mil|Location2.X=7217.417mil|Location1.Y=4582.764mil|Location2.Y=8238.764mil|Absolute=True">Modified Polygon: Polygon Shelved  (Bottom Layer-No Net) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDT2D4BXMGMP5PNTERL0ZZWYGNPTWTGWCEWA5RAO5S2VLOBE3TH2O"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Hole Size Constraint (Min=19.685mil) (Max=100mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7384.508mil|Location2.X=7523.554mil|Location1.Y=7972.926mil|Location2.Y=8111.971mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7384.508mil|Location2.X=7523.554mil|Location1.Y=7972.926mil|Location2.Y=8111.971mil|Absolute=True">Hole Size Constraint: (137.795mil &gt; 100mil) Pad Free-0(127.952mil,-137.796mil) on Multi-Layer Actual Hole Size = 137.795mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7384.508mil|Location2.X=7523.554mil|Location1.Y=4823.32mil|Location2.Y=4962.365mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7384.508mil|Location2.X=7523.554mil|Location1.Y=4823.32mil|Location2.Y=4962.365mil|Absolute=True">Hole Size Constraint: (137.795mil &gt; 100mil) Pad Free-0(127.952mil,-3287.402mil) on Multi-Layer Actual Hole Size = 137.795mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10750.651mil|Location2.X=10889.696mil|Location1.Y=7972.927mil|Location2.Y=8111.972mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10750.651mil|Location2.X=10889.696mil|Location1.Y=7972.927mil|Location2.Y=8111.972mil|Absolute=True">Hole Size Constraint: (137.795mil &gt; 100mil) Pad Free-0(3494.094mil,-137.795mil) on Multi-Layer Actual Hole Size = 137.795mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10750.65mil|Location2.X=10889.695mil|Location1.Y=4823.32mil|Location2.Y=4962.365mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10750.65mil|Location2.X=10889.695mil|Location1.Y=4823.32mil|Location2.Y=4962.365mil|Absolute=True">Hole Size Constraint: (137.795mil &gt; 100mil) Pad Free-0(3494.094mil,-3287.402mil) on Multi-Layer Actual Hole Size = 137.795mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8339.548mil|Location2.X=8353.296mil|Location1.Y=5735.714mil|Location2.Y=5749.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8339.548mil|Location2.X=8353.296mil|Location1.Y=5735.714mil|Location2.Y=5749.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (1020mil,-2438mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8340.548mil|Location2.X=8354.296mil|Location1.Y=5286.714mil|Location2.Y=5300.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8340.548mil|Location2.X=8354.296mil|Location1.Y=5286.714mil|Location2.Y=5300.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (1021mil,-2887mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8352.454mil|Location2.X=8369.564mil|Location1.Y=7104.62mil|Location2.Y=7121.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8352.454mil|Location2.X=8369.564mil|Location1.Y=7104.62mil|Location2.Y=7121.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (1034mil,-1068mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8384.307mil|Location2.X=8401.418mil|Location1.Y=7105.757mil|Location2.Y=7122.966mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8384.307mil|Location2.X=8401.418mil|Location1.Y=7105.757mil|Location2.Y=7122.966mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (1065.854mil,-1066.862mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8463.811mil|Location2.X=8480.921mil|Location1.Y=6627.906mil|Location2.Y=6645.115mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8463.811mil|Location2.X=8480.921mil|Location1.Y=6627.906mil|Location2.Y=6645.115mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (1145.357mil,-1544.714mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8484.454mil|Location2.X=8501.564mil|Location1.Y=6603.62mil|Location2.Y=6620.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8484.454mil|Location2.X=8501.564mil|Location1.Y=6603.62mil|Location2.Y=6620.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (1166mil,-1569mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8500.454mil|Location2.X=8517.564mil|Location1.Y=6574.62mil|Location2.Y=6591.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8500.454mil|Location2.X=8517.564mil|Location1.Y=6574.62mil|Location2.Y=6591.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (1182mil,-1598mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8546.548mil|Location2.X=8560.296mil|Location1.Y=5732.714mil|Location2.Y=5746.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8546.548mil|Location2.X=8560.296mil|Location1.Y=5732.714mil|Location2.Y=5746.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (1227mil,-2441mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8548.548mil|Location2.X=8562.296mil|Location1.Y=5284.714mil|Location2.Y=5298.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8548.548mil|Location2.X=8562.296mil|Location1.Y=5284.714mil|Location2.Y=5298.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (1229mil,-2889mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8677.454mil|Location2.X=8694.564mil|Location1.Y=6772.62mil|Location2.Y=6789.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8677.454mil|Location2.X=8694.564mil|Location1.Y=6772.62mil|Location2.Y=6789.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (1359mil,-1400mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8745.548mil|Location2.X=8759.296mil|Location1.Y=5286.714mil|Location2.Y=5300.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8745.548mil|Location2.X=8759.296mil|Location1.Y=5286.714mil|Location2.Y=5300.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (1426mil,-2887mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8746.548mil|Location2.X=8760.296mil|Location1.Y=5731.714mil|Location2.Y=5745.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8746.548mil|Location2.X=8760.296mil|Location1.Y=5731.714mil|Location2.Y=5745.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (1427mil,-2442mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8824.454mil|Location2.X=8841.564mil|Location1.Y=6293.62mil|Location2.Y=6310.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8824.454mil|Location2.X=8841.564mil|Location1.Y=6293.62mil|Location2.Y=6310.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (1506mil,-1879mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8950.548mil|Location2.X=8964.296mil|Location1.Y=5731.714mil|Location2.Y=5745.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8950.548mil|Location2.X=8964.296mil|Location1.Y=5731.714mil|Location2.Y=5745.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (1631mil,-2442mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8950.548mil|Location2.X=8964.296mil|Location1.Y=5287.714mil|Location2.Y=5301.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8950.548mil|Location2.X=8964.296mil|Location1.Y=5287.714mil|Location2.Y=5301.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (1631mil,-2886mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9041.705mil|Location2.X=9058.816mil|Location1.Y=7048.936mil|Location2.Y=7066.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9041.705mil|Location2.X=9058.816mil|Location1.Y=7048.936mil|Location2.Y=7066.145mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (1723.252mil,-1123.684mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9058.203mil|Location2.X=9075.313mil|Location1.Y=6819.875mil|Location2.Y=6837.084mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9058.203mil|Location2.X=9075.313mil|Location1.Y=6819.875mil|Location2.Y=6837.084mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (1739.749mil,-1352.745mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9064.454mil|Location2.X=9081.564mil|Location1.Y=6788.62mil|Location2.Y=6805.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9064.454mil|Location2.X=9081.564mil|Location1.Y=6788.62mil|Location2.Y=6805.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (1746mil,-1384mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9069.454mil|Location2.X=9086.564mil|Location1.Y=7064.62mil|Location2.Y=7081.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9069.454mil|Location2.X=9086.564mil|Location1.Y=7064.62mil|Location2.Y=7081.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (1751mil,-1108mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9094.343mil|Location2.X=9111.453mil|Location1.Y=7084.531mil|Location2.Y=7101.74mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9094.343mil|Location2.X=9111.453mil|Location1.Y=7084.531mil|Location2.Y=7101.74mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (1775.889mil,-1088.089mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9111.454mil|Location2.X=9128.564mil|Location1.Y=6730.62mil|Location2.Y=6747.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9111.454mil|Location2.X=9128.564mil|Location1.Y=6730.62mil|Location2.Y=6747.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (1793mil,-1442mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9115.454mil|Location2.X=9132.564mil|Location1.Y=6466.62mil|Location2.Y=6483.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9115.454mil|Location2.X=9132.564mil|Location1.Y=6466.62mil|Location2.Y=6483.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (1797mil,-1706mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9154.548mil|Location2.X=9168.296mil|Location1.Y=5284.714mil|Location2.Y=5298.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9154.548mil|Location2.X=9168.296mil|Location1.Y=5284.714mil|Location2.Y=5298.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (1835mil,-2889mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9156.548mil|Location2.X=9170.296mil|Location1.Y=5725.714mil|Location2.Y=5739.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9156.548mil|Location2.X=9170.296mil|Location1.Y=5725.714mil|Location2.Y=5739.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (1837mil,-2448mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9286.454mil|Location2.X=9303.564mil|Location1.Y=6426.62mil|Location2.Y=6443.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9286.454mil|Location2.X=9303.564mil|Location1.Y=6426.62mil|Location2.Y=6443.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (1968mil,-1746mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9354.548mil|Location2.X=9368.296mil|Location1.Y=5726.714mil|Location2.Y=5740.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9354.548mil|Location2.X=9368.296mil|Location1.Y=5726.714mil|Location2.Y=5740.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (2035mil,-2447mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9359.548mil|Location2.X=9373.296mil|Location1.Y=5286.714mil|Location2.Y=5300.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9359.548mil|Location2.X=9373.296mil|Location1.Y=5286.714mil|Location2.Y=5300.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (2040mil,-2887mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9562.548mil|Location2.X=9576.296mil|Location1.Y=5282.714mil|Location2.Y=5296.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9562.548mil|Location2.X=9576.296mil|Location1.Y=5282.714mil|Location2.Y=5296.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (2243mil,-2891mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9564.548mil|Location2.X=9578.296mil|Location1.Y=5725.714mil|Location2.Y=5739.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9564.548mil|Location2.X=9578.296mil|Location1.Y=5725.714mil|Location2.Y=5739.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (2245mil,-2448mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9750.454mil|Location2.X=9767.564mil|Location1.Y=7295.62mil|Location2.Y=7312.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9750.454mil|Location2.X=9767.564mil|Location1.Y=7295.62mil|Location2.Y=7312.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (2432mil,-877mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9760.454mil|Location2.X=9777.564mil|Location1.Y=7330.62mil|Location2.Y=7347.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9760.454mil|Location2.X=9777.564mil|Location1.Y=7330.62mil|Location2.Y=7347.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (2442mil,-842mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9766.548mil|Location2.X=9780.296mil|Location1.Y=5725.714mil|Location2.Y=5739.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9766.548mil|Location2.X=9780.296mil|Location1.Y=5725.714mil|Location2.Y=5739.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (2447mil,-2448mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9769.548mil|Location2.X=9783.296mil|Location1.Y=5283.714mil|Location2.Y=5297.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9769.548mil|Location2.X=9783.296mil|Location1.Y=5283.714mil|Location2.Y=5297.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (2450mil,-2890mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7571.454mil|Location2.X=7588.564mil|Location1.Y=6696.62mil|Location2.Y=6713.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7571.454mil|Location2.X=7588.564mil|Location1.Y=6696.62mil|Location2.Y=6713.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (253mil,-1476mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9871.454mil|Location2.X=9888.564mil|Location1.Y=7305.62mil|Location2.Y=7322.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9871.454mil|Location2.X=9888.564mil|Location1.Y=7305.62mil|Location2.Y=7322.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (2553mil,-867mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9942.454mil|Location2.X=9959.564mil|Location1.Y=7331.62mil|Location2.Y=7348.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9942.454mil|Location2.X=9959.564mil|Location1.Y=7331.62mil|Location2.Y=7348.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (2624mil,-841mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9969.548mil|Location2.X=9983.296mil|Location1.Y=5282.714mil|Location2.Y=5296.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9969.548mil|Location2.X=9983.296mil|Location1.Y=5282.714mil|Location2.Y=5296.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (2650mil,-2891mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9972.548mil|Location2.X=9986.296mil|Location1.Y=5728.714mil|Location2.Y=5742.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9972.548mil|Location2.X=9986.296mil|Location1.Y=5728.714mil|Location2.Y=5742.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (2653mil,-2445mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10169.548mil|Location2.X=10183.296mil|Location1.Y=5728.714mil|Location2.Y=5742.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10169.548mil|Location2.X=10183.296mil|Location1.Y=5728.714mil|Location2.Y=5742.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (2850mil,-2445mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10174.548mil|Location2.X=10188.296mil|Location1.Y=5287.714mil|Location2.Y=5301.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10174.548mil|Location2.X=10188.296mil|Location1.Y=5287.714mil|Location2.Y=5301.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (2855mil,-2886mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10339.548mil|Location2.X=10353.296mil|Location1.Y=6265.714mil|Location2.Y=6279.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10339.548mil|Location2.X=10353.296mil|Location1.Y=6265.714mil|Location2.Y=6279.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (3020mil,-1908mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7725.548mil|Location2.X=7739.296mil|Location1.Y=5733.714mil|Location2.Y=5747.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7725.548mil|Location2.X=7739.296mil|Location1.Y=5733.714mil|Location2.Y=5747.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (406mil,-2440mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7728.548mil|Location2.X=7742.296mil|Location1.Y=5282.714mil|Location2.Y=5296.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7728.548mil|Location2.X=7742.296mil|Location1.Y=5282.714mil|Location2.Y=5296.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (409mil,-2891mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7933.548mil|Location2.X=7947.296mil|Location1.Y=5286.714mil|Location2.Y=5300.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7933.548mil|Location2.X=7947.296mil|Location1.Y=5286.714mil|Location2.Y=5300.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (614mil,-2887mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7934.548mil|Location2.X=7948.296mil|Location1.Y=5732.714mil|Location2.Y=5746.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7934.548mil|Location2.X=7948.296mil|Location1.Y=5732.714mil|Location2.Y=5746.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (615mil,-2441mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8132.548mil|Location2.X=8146.296mil|Location1.Y=5729.714mil|Location2.Y=5743.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8132.548mil|Location2.X=8146.296mil|Location1.Y=5729.714mil|Location2.Y=5743.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (813mil,-2444mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8133.548mil|Location2.X=8147.296mil|Location1.Y=5284.714mil|Location2.Y=5298.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8133.548mil|Location2.X=8147.296mil|Location1.Y=5284.714mil|Location2.Y=5298.543mil|Absolute=True">Hole Size Constraint: (11.811mil &lt; 19.685mil) Via (814mil,-2889mil) from Top Layer to Bottom Layer Actual Hole Size = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8208.454mil|Location2.X=8225.564mil|Location1.Y=7387.62mil|Location2.Y=7404.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8208.454mil|Location2.X=8225.564mil|Location1.Y=7387.62mil|Location2.Y=7404.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (890mil,-785mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8267.454mil|Location2.X=8284.564mil|Location1.Y=7487.62mil|Location2.Y=7504.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8267.454mil|Location2.X=8284.564mil|Location1.Y=7487.62mil|Location2.Y=7504.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (949mil,-685mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8286.454mil|Location2.X=8303.564mil|Location1.Y=7449.62mil|Location2.Y=7466.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\CarStation\DK TT\DK TT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8286.454mil|Location2.X=8303.564mil|Location1.Y=7449.62mil|Location2.Y=7466.829mil|Absolute=True">Hole Size Constraint: (14mil &lt; 19.685mil) Via (968mil,-723mil) from Top Layer to Bottom Layer Actual Hole Size = 14mil</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
